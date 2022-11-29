@@ -39,29 +39,29 @@ let comments = [
 ]
 
 app.get('/comments', (req, res) => {
-    res.render('comments/index', { comments });
+    res.render('/index', { comments });
 })
 
 app.get('/comments/new', (req, res) => {
-    res.render('comments/new');
+    res.render('/new');
 })
 
 app.post('/comments', (req, res) => {
     const { username, comment } = req.body;
     comments.push({ username, comment, id: uuid() })
-    res.redirect('/comments');
+    res.redirect('/');
 })
 
 app.get('/comments/:id', (req, res) => {
     const { id } = req.params;
     const comment = comments.find(c => c.id === id);
-    res.render('comments/show', { comment })
+    res.render('/show', { comment })
 })
 
 app.get('/comments/:id/edit', (req, res) => {
     const { id } = req.params;
     const comment = comments.find(c => c.id === id);
-    res.render('comments/edit', { comment })
+    res.render('/edit', { comment })
 })
 
 app.patch('/comments/:id', (req, res) => {
@@ -73,7 +73,7 @@ app.patch('/comments/:id', (req, res) => {
     
     foundComment.comment = newCommentText;
     
-    res.redirect('/comments')
+    res.redirect('/')
 })
 
 
